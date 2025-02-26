@@ -14,8 +14,14 @@ public class SquarePrism extends Prism {
 		return getSide() * getSide() * getHeight();
 	}
 
+	@Override
 	public double calcBaseArea() {
 		return getSide() * getSide();
+	}
+	
+	@Override
+	public String toString() {
+		return "Side: " + getSide() + " - Height: " + getHeight() + " - Area: " + calcBaseArea() + " - Volume: " + calcVolume();
 	}
 
 }

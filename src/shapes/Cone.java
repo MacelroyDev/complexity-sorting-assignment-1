@@ -23,10 +23,16 @@ public class Cone extends Shape {
 
 	@Override
 	public double calcVolume() {
-		return (1 / 3) * Math.PI * radius * radius * getHeight(); // Test this to make sure the (1/3) works as intended
+		return ( Math.PI * radius * radius * getHeight()/3); // Fixed, divide by 3 instead of multiplying by 1/3
 	}
 
+	@Override
 	public double calcBaseArea() {
 		return Math.PI * radius * radius;
+	}
+	
+	@Override
+	public String toString() {
+		return "Radius: " + getRadius() + " - Height: " + getHeight() + " - Area: " + calcBaseArea() + " - Volume: " + calcVolume();
 	}
 }

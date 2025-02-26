@@ -14,8 +14,14 @@ public class PentagonalPrism extends Prism {
 		return calcBaseArea() * getHeight(); // area * height
 	}
 
+	@Override
 	public double calcBaseArea() { // DOUBLE CHECK THIS ONE!!! since it's a lot longer than the others
 		return (5 * (getSide() * getSide()) * Math.tan(Math.toRadians(54))) / 4; // (5 * side^2 * tan(54)) / 4
+	}
+	
+	@Override
+	public String toString() {
+		return "Side: " + getSide() + " - Height: " + getHeight() + " - Area: " + calcBaseArea() + " - Volume: " + calcVolume();
 	}
 
 }

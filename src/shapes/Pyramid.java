@@ -23,10 +23,16 @@ public class Pyramid extends Shape {
 
 	@Override
 	public double calcVolume() {
-		return (1 / 3) * side * side * getHeight(); // Test this to make sure the (1/3) works as intended here too
+		return (side * side * getHeight())/3; // Fixed, divide by 3 instead of multiplying by 1/3
 	}
 
+	@Override
 	public double calcBaseArea() {
 		return side * side;
+	}
+	
+	@Override
+	public String toString() {
+		return "Side: " + getSide() + " - Height: " + getHeight() + " - Area: " + calcBaseArea() + " - Volume: " + calcVolume();
 	}
 }

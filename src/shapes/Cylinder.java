@@ -26,8 +26,14 @@ public class Cylinder extends Shape {
 		return Math.PI * radius * radius * getHeight(); // I could probably do ^2 better but this will work too
 	}
 
+	@Override
 	public double calcBaseArea() {
 		return Math.PI * radius * radius;
+	}
+	
+	@Override
+	public String toString() {
+		return "Radius: " + getRadius() + " - Height: " + getHeight() + " - Area: " + calcBaseArea() + " - Volume: " + calcVolume();
 	}
 
 }

@@ -19,7 +19,7 @@ public class Cone extends Shape {
 		this.radius = radius;
 	}
 
-	// Override calcVolume & calcBaseArea for cylinder class
+	// Override calcVolume & calcBaseArea
 
 	@Override
 	public double calcVolume() {

@@ -19,7 +19,7 @@ public class Pyramid extends Shape {
 		this.side = side;
 	}
 
-	// Override calcVolume & calcBaseArea for cylinder class
+	// Override calcVolume & calcBaseArea
 
 	@Override
 	public double calcVolume() {

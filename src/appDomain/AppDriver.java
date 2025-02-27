@@ -32,10 +32,80 @@ public class AppDriver
 		AppDriver argParser = new AppDriver();
 		if (argParser.parseArgs(args))
 		{
+			File inputFile = new File(fileName);
+			Scanner input = null;
 			
+			int numOfShapes;
+			
+			try
+			{
+				input = new Scanner(inputFile);
+			}
+			catch( FileNotFoundException e )
+			{
+				e.printStackTrace();
+			}
+			
+			if(input.hasNext())
+			{
+				numOfShapes = input.nextInt();
+			}
+			
+			// TODO array to store each shape object using numOfShapes as size
+			
+			while(input.hasNext())
+			{
+				String[] shapeInfo = input.next().split(" ");
+				
+				String shapeType = shapeInfo[0];
+				double shapeSide = Double.parseDouble(shapeInfo[1]);
+				double shapeHeight = Double.parseDouble(shapeInfo[2]);
+				
+				switch(shapeType)
+				{
+					case "Cone":
+						Cone newCone = new Cone(shapeSide, shapeHeight);
+						System.out.println(newCone.toString());
+						break;
+						
+					case "Cylinder":
+						Cylinder newCylinder = new Cylinder(shapeSide, shapeHeight);
+						System.out.println(newCylinder.toString());
+						break;
+						
+					case "OctagonalPrism":
+						OctagonalPrism newOctagonalPrism = new OctagonalPrism(shapeSide, shapeHeight);
+						System.out.println(newOctagonalPrism.toString());
+						break;
+						
+					case "PentagonalPrism":
+						PentagonalPrism newPentagonalPrism = new PentagonalPrism(shapeSide, shapeHeight);
+						System.out.println(newPentagonalPrism.toString());
+						break;
+						
+					case "Pyramid":
+						Pyramid newPyramid = new Pyramid(shapeSide, shapeHeight);
+						System.out.println(newPyramid.toString());
+						break;
+						
+					case "SquarePrism":
+						SquarePrism newSquarePrism = new SquarePrism(shapeSide, shapeHeight);
+						System.out.println(newSquarePrism.toString());
+						break;
+						
+					case "TriangularPrism":
+						TriangularPrism newTriangularPrism = new TriangularPrism(shapeSide, shapeHeight);
+						System.out.println(newTriangularPrism.toString());
+						break;
+						
+					default:
+						break;
+				}
+			}
 		} 
 		else
 		{
+			// Error message when argument(s) is incorrect
 			System.out.println("Please enter the following command line arguments:");
 			System.out.println("Example: java -jar Sort.jar -ffile_name -tv -sb");
 			System.out.println("-f or -F followed by file_name (the file name and path) with no spaces");

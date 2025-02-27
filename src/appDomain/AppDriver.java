@@ -31,7 +31,8 @@ public class AppDriver
 		
 		if (argParser.parseArgs(args) != null)
 		{
-			System.out.print("Chosen sort: " + argParser.parseArgs(args) + "\n");
+			System.out.print("Chosen sort: " + argParser.getSortingAlgorithm() + "\n");
+			System.out.print("Chosen unit: " + argParser.getUnitType() + "\n");
 			Shape[] shapes = argParser.generateArray();
 			for (Shape shape : shapes)
 			{

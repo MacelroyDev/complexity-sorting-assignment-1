@@ -7,10 +7,42 @@ import shapes.*;
 
 public class ArgumentParser {
 
+	
+	// Set vars
 	private String fileName;
 	private char unitType;
 	private char sortingAlgorithm;
+	
+	
+	// Getters and Setters
+	public String getFileName() {
+		return fileName;
+	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public char getUnitType() {
+		return unitType;
+	}
+
+	public void setUnitType(char unitType) {
+		this.unitType = unitType;
+	}
+
+	public char getSortingAlgorithm() {
+		return sortingAlgorithm;
+	}
+
+	public void setSortingAlgorithm(char sortingAlgorithm) {
+		this.sortingAlgorithm = sortingAlgorithm;
+	}
+
+	
+	
+	// Parse Arguments ----------------------------
+	
 	public Character parseArgs(String[] args) {
 		for (String arg : args) {
 			if (!arg.startsWith("-") || arg.length() < 3) {
@@ -33,7 +65,7 @@ public class ArgumentParser {
 				char type = Character.toLowerCase(arg.charAt(2));
 
 				if (type == 'v' || type == 'h' || type == 'a') {
-					unitType = type;
+					setUnitType(type);
 				} else {
 					System.out.println("Incorrect '-t' flag argument");
 					return null;
@@ -50,7 +82,7 @@ public class ArgumentParser {
 
 				if (algorithm == 'b' || algorithm == 's' || algorithm == 'i' || algorithm == 'm' || algorithm == 'q'
 						|| algorithm == 'z') {
-					sortingAlgorithm = algorithm;
+					setSortingAlgorithm(algorithm);
 				} else {
 					System.out.println("Incorrect '-s' flag argument");
 					return null;
@@ -71,8 +103,12 @@ public class ArgumentParser {
 
 	}
 
+	
+	
+	// Generate Array ---------------------------------------
+	
 	public Shape[] generateArray() {
-		File inputFile = new File(fileName);
+		File inputFile = new File(getFileName());
 		Scanner input = null;
 
 		int numOfShapes = 0;

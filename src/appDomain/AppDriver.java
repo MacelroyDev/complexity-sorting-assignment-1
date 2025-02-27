@@ -1,8 +1,5 @@
 package appDomain;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import shapes.*;
 import appDomain.parser.*;
 

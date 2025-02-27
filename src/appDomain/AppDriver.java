@@ -9,9 +9,9 @@ import appDomain.parser.*;
 public class AppDriver
 {
 	// CLI argument variables
-	private String fileName;
-	private char unitType;
-	private char sortingAlgorithm;
+	//private String fileName;
+	//private char unitType;
+	//private char sortingAlgorithm;
 	
 	public static void main( String[] args )
 	{
@@ -32,8 +32,9 @@ public class AppDriver
 		
 		ArgumentParser argParser = new ArgumentParser();
 		
-		if (argParser.parseArgs(args))
+		if (argParser.parseArgs(args) != null)
 		{
+			System.out.print("Chosen sort: " + argParser.parseArgs(args) + "\n");
 			Shape[] shapes = argParser.generateArray();
 			for (Shape shape : shapes)
 			{

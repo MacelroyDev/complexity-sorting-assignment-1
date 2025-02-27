@@ -3,15 +3,7 @@ package appDomain.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import shapes.Cone;
-import shapes.Cylinder;
-import shapes.OctagonalPrism;
-import shapes.PentagonalPrism;
-import shapes.Pyramid;
-import shapes.Shape;
-import shapes.SquarePrism;
-import shapes.TriangularPrism;
+import shapes.*;
 
 public class ArgumentParser {
 
@@ -19,10 +11,10 @@ public class ArgumentParser {
 	private char unitType;
 	private char sortingAlgorithm;
 
-	public boolean parseArgs(String[] args) {
+	public Character parseArgs(String[] args) {
 		for (String arg : args) {
 			if (!arg.startsWith("-") || arg.length() < 3) {
-				return false;
+				return null;
 			}
 
 			char flag = Character.toLowerCase(arg.charAt(1));
@@ -35,7 +27,7 @@ public class ArgumentParser {
 			case 't':
 				if (arg.length() != 3) {
 					System.out.println("Incorrect '-t' flag argument");
-					return false;
+					return null;
 				}
 
 				char type = Character.toLowerCase(arg.charAt(2));
@@ -44,14 +36,14 @@ public class ArgumentParser {
 					unitType = type;
 				} else {
 					System.out.println("Incorrect '-t' flag argument");
-					return false;
+					return null;
 				}
 				break;
 
 			case 's':
 				if (arg.length() != 3) {
 					System.out.println("Incorrect '-s' flag argument");
-					return false;
+					return null;
 				}
 
 				char algorithm = Character.toLowerCase(arg.charAt(2));
@@ -61,17 +53,22 @@ public class ArgumentParser {
 					sortingAlgorithm = algorithm;
 				} else {
 					System.out.println("Incorrect '-s' flag argument");
-					return false;
+					return null;
 				}
 				break;
 
 			default:
 				System.out.println("Incorrect flag(s)");
-				return false;
+				return null;
 			}
 		}
 
-		return (fileName != null && unitType != 0 && sortingAlgorithm != 0);
+		if (fileName != null && unitType != 0 && sortingAlgorithm != 0) {
+			return (sortingAlgorithm);
+		} else {
+			return null;
+		}
+
 	}
 
 	public Shape[] generateArray() {

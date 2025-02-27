@@ -32,7 +32,11 @@ public class AppDriver
 		AppDriver argParser = new AppDriver();
 		if (argParser.parseArgs(args))
 		{
-			argParser.runProgram();
+			Shape[] shapes = argParser.generateArray();
+			for (Shape shape : shapes)
+			{
+				System.out.print(shape + "\n");
+			}
 		} 
 		else
 		{
@@ -131,16 +135,11 @@ public class AppDriver
                     return false;
             }
         }
-        
-        //debugging purposes
-        System.out.println(fileName);
-        System.out.println(unitType);
-        System.out.println(sortingAlgorithm);
 
         return (fileName != null && unitType != 0 && sortingAlgorithm != 0);
 	}
 	
-	private void runProgram()
+	private Shape[] generateArray()
 	{
 		File inputFile = new File(fileName);
 		Scanner input = null;
@@ -180,43 +179,36 @@ public class AppDriver
 		            {
 		                case "Cone":
 		                    Cone newCone = new Cone(shapeSide, shapeHeight);
-		                    System.out.println(newCone.toString());
 		                    shapes[arrIndex++] = newCone;
 		                    break;
 		                    
 		                case "Cylinder":
 		                    Cylinder newCylinder = new Cylinder(shapeSide, shapeHeight);
-		                    System.out.println(newCylinder.toString());
 		                    shapes[arrIndex++] = newCylinder;
 		                    break;
 		                    
 		                case "OctagonalPrism":
 		                    OctagonalPrism newOctagonalPrism = new OctagonalPrism(shapeSide, shapeHeight);
-		                    System.out.println(newOctagonalPrism.toString());
 		                    shapes[arrIndex++] = newOctagonalPrism;
 		                    break;
 		                    
 		                case "PentagonalPrism":
 		                    PentagonalPrism newPentagonalPrism = new PentagonalPrism(shapeSide, shapeHeight);
-		                    System.out.println(newPentagonalPrism.toString());
 		                    shapes[arrIndex++] = newPentagonalPrism;
 		                    break;
 		                    
 		                case "Pyramid":
 		                    Pyramid newPyramid = new Pyramid(shapeSide, shapeHeight);
-		                    System.out.println(newPyramid.toString());
 		                    shapes[arrIndex++] = newPyramid;
 		                    break;
 		                    
 		                case "SquarePrism":
 		                    SquarePrism newSquarePrism = new SquarePrism(shapeSide, shapeHeight);
-		                    System.out.println(newSquarePrism.toString());
 		                    shapes[arrIndex++] = newSquarePrism;
 		                    break;
 		                    
 		                case "TriangularPrism":
 		                    TriangularPrism newTriangularPrism = new TriangularPrism(shapeSide, shapeHeight);
-		                    System.out.println(newTriangularPrism.toString());
 		                    shapes[arrIndex++] = newTriangularPrism;
 		                    break;
 		                    
@@ -226,5 +218,6 @@ public class AppDriver
 		        }
 		    }
 		}
+		return shapes;
 	}
 }

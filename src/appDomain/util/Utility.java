@@ -1,6 +1,9 @@
 package appDomain.util;
 
+import java.util.Comparator;
 import shapes.Shape;
+import shapes.BaseAreaComparator;
+import shapes.VolumeComparator;
 
 /**
  * Provides sorting algorithms for Shape arrays.
@@ -26,6 +29,7 @@ public class Utility
 	{
 		int n = shapes.length;
 		int sortedCount = 1;
+		Comparator<Shape> comparator = null; // Declare comparator
 
 		System.out.printf("%-20s %-25s %-10f%n", "First element:", shapes[0].getClass().getSimpleName(),
 				(unitType == 'h' ? shapes[0].getHeight()
@@ -42,7 +46,9 @@ public class Utility
 				}
 				else if (unitType == 'v')
 				{
-					comparison = Double.compare(shapes[x].calcVolume(), shapes[x + 1].calcVolume());
+					comparator = new VolumeComparator();
+					//comparison = Double.compare(shapes[x].calcVolume(), shapes[x + 1].calcVolume());
+					comparison = comparator.compare(shapes[x], shapes[x+1]);
 				}
 				else if (unitType == 'a')
 				{

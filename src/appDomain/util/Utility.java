@@ -209,15 +209,41 @@ public class Utility {
 	 * @param unitType The property to sort by (h=height, v=volume, a=base area)
 	 * @return The array of Shape objects (currently unsorted)
 	 */
-	public static Shape[] mergeSort(Shape[] shapes, char unitType) {
-		if (shapes == null || shapes.length <= 1) { // if already sorted or empty (stops recursion)
-			return shapes;
+	public static Shape[] mergeSort(Shape[] shapes, char unitType, int n) {		
+		if (n <= 1) { // Recursion check
+			return null;
 		}
-
+		
+		int mid = n / 2;
+		// Create new arrays for each half
+		Shape[] left = new Shape[mid];
+		Shape[] right = new Shape[n-mid];
+		
+		// Split the arrays
+		for (int i = 0; i < mid; i++) {
+			left[i] = shapes[i];
+		}
+		
+		for (int i = mid; i < n; i++) {
+			right[i - mid] = shapes[i];
+		}
+		
+		// Call recursive method for each array
+		mergeSort(left,unitType,mid);
+		mergeSort(right,unitType,n - mid);
+		
+		
+		// Return a merged value of the final array
+		return merge(shapes,left,right,mid,n - mid, unitType);
+		
+		
+	}
+	
+	// Helper function for merge sort to re-merge the arrays
+	public static Shape[] merge(Shape[] shapes,Shape[] l,Shape[] r,int left, int right,char unitType) {
+		
 		Comparator<Shape> comparator = null; // Declare comparator
-
-		// Set comparator based on args
-
+		
 		if (unitType == 'h') {
 			comparator = Comparator.naturalOrder(); // natural order uses the Comparable written in shapes class
 		} else if (unitType == 'v') {
@@ -225,54 +251,30 @@ public class Utility {
 		} else if (unitType == 'a') {
 			comparator = new BaseAreaComparator();
 		}
-
-		return mergeSortHelper(shapes, comparator);
-	}
-
-	// Helper merge function to assist with merge sort recursion
-	
-    private static Shape[] mergeSortHelper(Shape[] shapes, Comparator<Shape> comparator) {
-        if (shapes.length <= 1) {
-            return shapes;
-        }
-
-        int n = shapes.length;
-        int mid = n / 2;
-
-        Shape[] left = Arrays.copyOfRange(shapes, 0, mid);
-        Shape[] right = Arrays.copyOfRange(shapes, mid, n);
-
-        left = mergeSortHelper(left, comparator); // Recursive calls with comparator
-        right = mergeSortHelper(right, comparator);
-
-        return merge(left, right, comparator);
-    }
-
-	private static Shape[] merge(Shape[] left, Shape[] right, Comparator<Shape> comparator) {
-		int leftLen = left.length;
-		int rightLen = right.length;
-		Shape[] result = new Shape[leftLen + rightLen];
-
+		
+		
 		int i = 0, j = 0, k = 0;
-
-		while (i < leftLen && j < rightLen) {
-			if (comparator.compare(left[i], right[j]) <= 0) {
-				result[k++] = left[i++];
-			} else {
-				result[k++] = right[j++];
-			}
-		}
-
-		while (i < leftLen) {
-			result[k++] = left[i++];
-		}
-
-		while (j < rightLen) {
-			result[k++] = right[j++];
-		}
-
-		return result;
+	    while (i < left && j < right) {
+	    	int comparison = 0;
+	    	comparison = comparator.compare(l[i], r[j]);
+	    	
+	        if (comparison < 1) {
+	        	shapes[k++] = l[i++];
+	        }
+	        else {
+	        	shapes[k++] = r[j++];
+	        }
+	    }
+	    while (i < left) {
+	    	shapes[k++] = l[i++];
+	    }
+	    while (j < right) {
+	    	shapes[k++] = r[j++];
+	    }
+		
+		return shapes;
 	}
+
 
 	/**
 	 * Sorts an array of shapes using the quick sort algorithm.

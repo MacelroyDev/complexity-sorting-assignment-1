@@ -58,7 +58,8 @@ public class AppDriver
 					break;
 					
 				case 'm':
-					sortedArr = Utility.mergeSort(shapes, unitType);
+					// Merge sort needs another arg for recursion
+					sortedArr = Utility.mergeSort(shapes, unitType, shapes.length);
 					
 				case 'q':
 					sortedArr = Utility.quickSort(shapes, unitType);

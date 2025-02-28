@@ -210,9 +210,9 @@ public class Utility {
 	 * @return The array of Shape objects (currently unsorted)
 	 */
 	public static Shape[] mergeSort(Shape[] shapes, char unitType) {
-		if (shapes == null || shapes.length <= 1) { // Base case: already sorted or empty
-            return shapes;
-        }
+		if (shapes == null || shapes.length <= 1) { // if already sorted or empty (stops recursion)
+			return shapes;
+		}
 
 		Comparator<Shape> comparator = null; // Declare comparator
 
@@ -226,21 +226,27 @@ public class Utility {
 			comparator = new BaseAreaComparator();
 		}
 
-		int n = shapes.length;
-		int mid = n / 2;
-
-		// Split array at the middle
-
-		Shape[] left = Arrays.copyOfRange(shapes, 0, mid);
-		Shape[] right = Arrays.copyOfRange(shapes, mid, n);
-
-		left = mergeSort(left, unitType);
-		right = mergeSort(right, unitType);
-
-		Shape[] result = merge(left, right, comparator);
-
-		return result;
+		return mergeSortHelper(shapes, comparator);
 	}
+
+	// Helper merge function to assist with merge sort recursion
+	
+    private static Shape[] mergeSortHelper(Shape[] shapes, Comparator<Shape> comparator) {
+        if (shapes.length <= 1) {
+            return shapes;
+        }
+
+        int n = shapes.length;
+        int mid = n / 2;
+
+        Shape[] left = Arrays.copyOfRange(shapes, 0, mid);
+        Shape[] right = Arrays.copyOfRange(shapes, mid, n);
+
+        left = mergeSortHelper(left, comparator); // Recursive calls with comparator
+        right = mergeSortHelper(right, comparator);
+
+        return merge(left, right, comparator);
+    }
 
 	private static Shape[] merge(Shape[] left, Shape[] right, Comparator<Shape> comparator) {
 		int leftLen = left.length;
@@ -283,6 +289,18 @@ public class Utility {
 		return shapes;
 	}
 
+	
+	
+	/**
+	 * Prints the first, last, and every 1000th element of the sorted array
+	 * 
+	 * This method prints the array of sorted shapes to the console according
+	 * to the criteria listed above.
+	 * 
+	 * @param shapes   The array of sorted Shape objects to print
+	 * @param unitType The property to print along side the name
+	 * (h=height, v=volume, a=base area)
+	 */
 	public static void printSortedShapes(Shape[] shapes, char unitType) {
 
 		int n = shapes.length;
@@ -301,4 +319,33 @@ public class Utility {
 				(unitType == 'h' ? shapes[n - 1].getHeight()
 						: unitType == 'v' ? shapes[n - 1].calcVolume() : shapes[n - 1].calcBaseArea()));
 	}
+	
+	/**
+	 * Prints the entire sorted array
+	 * 
+	 * This method prints the entire array of sorted shapes for
+	 * the purpose of debugging
+	 * 
+	 * @param shapes   The array of sorted Shape objects to print
+	 * @param unitType The property to print along side the name
+	 * (h=height, v=volume, a=base area)
+	 */
+	public static void printArrayDebug(Shape[] shapes, char unitType) {
+		for (int i = 0; i < shapes.length; i++) {
+            Shape shape = shapes[i];
+            System.out.printf("Element %d: %s, ", i, shape.getClass().getSimpleName());
+
+            if (unitType == 'h') {
+                System.out.printf("Height: %.3f%n", shape.getHeight());
+            } else if (unitType == 'v') {
+                System.out.printf("Volume: %.3f%n", shape.calcVolume());
+            } else if (unitType == 'a') {
+                System.out.printf("Base Area: %.3f%n", shape.calcBaseArea());
+            } else {
+                System.out.println("Invalid unitType.");
+            }
+		}
+	}
+	
+	
 }

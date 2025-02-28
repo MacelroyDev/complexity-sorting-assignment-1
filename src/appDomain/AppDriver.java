@@ -1,8 +1,8 @@
 package appDomain;
 
-import shapes.*;
+import appDomain.parser.ArgumentParser;
+import shapes.Shape;
 import utility.Algorithms;
-import appDomain.parser.*;
 
 public class AppDriver
 {
@@ -48,7 +48,8 @@ public class AppDriver
 					return;
 					
 				case 'q':
-					return;
+					sortedArr = Algorithms.quickSort(shapes, unitType);
+					break;
 			}
 			long endTime = System.currentTimeMillis();
 			

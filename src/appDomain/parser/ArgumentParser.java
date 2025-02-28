@@ -3,7 +3,15 @@ package appDomain.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import shapes.*;
+
+import shapes.Cone;
+import shapes.Cylinder;
+import shapes.OctagonalPrism;
+import shapes.PentagonalPrism;
+import shapes.Pyramid;
+import shapes.Shape;
+import shapes.SquarePrism;
+import shapes.TriangularPrism;
 
 public class ArgumentParser
 {

@@ -1,9 +1,27 @@
-package utility;
+package appDomain.util;
 
 import shapes.Shape;
 
-public class Algorithms
+/**
+ * Provides sorting algorithms for Shape arrays.
+ * 
+ * This utility class contains implementations of various sorting algorithms
+ * that can be used to sort arrays of Shape objects based on their height,
+ * volume, or base area.
+ * 
+ */
+public class Utility
 {
+	/**
+     * Sorts an array of shapes using the bubble sort algorithm.
+     * 
+     * This method implements the bubble sort algorithm to sort the shapes
+     * in descending order based on the specified property (height, volume, or base area).
+     * 
+     * @param shapes  The array of Shape objects to sort
+     * @param unitType  The property to sort by (h=height, v=volume, a=base area)
+     * @return The sorted array of Shape objects
+     */
 	public static Shape[] bubbleSort(Shape[] shapes, char unitType)
 	{
 		int n = shapes.length;
@@ -54,6 +72,16 @@ public class Algorithms
 		return shapes;
 	}
 
+	/**
+     * Sorts an array of shapes using the insertion sort algorithm.
+     * 
+     * This method implements the insertion sort algorithm to sort the shapes
+     * in ascending order based on the specified property (height, volume, or base area).
+     * 
+     * @param shapes  The array of Shape objects to sort
+     * @param unitType  The property to sort by (h=height, v=volume, a=base area)
+     * @return The sorted array of Shape objects
+     */
 	public static Shape[] insertionSort(Shape[] shapes, char unitType)
 	{
 		int n = shapes.length;
@@ -113,6 +141,16 @@ public class Algorithms
 		return shapes;
 	}
 
+	/**
+     * Sorts an array of shapes using the selection sort algorithm.
+     * 
+     * This method implements the selection sort algorithm to sort the shapes
+     * in descending order based on the specified property (height, volume, or base area).
+     * 
+     * @param shapes  The array of Shape objects to sort
+     * @param unitType  The property to sort by (h=height, v=volume, a=base area)
+     * @return The sorted array of Shape objects
+     */
 	public static Shape[] selectionSort(Shape[] shapes, char unitType)
 	{
 		int n = shapes.length;
@@ -169,11 +207,31 @@ public class Algorithms
 		return shapes;
 	}
 
+	 /**
+     * Sorts an array of shapes using the merge sort algorithm.
+     * 
+     * This method implements the merge sort algorithm to sort the shapes
+     * in descending order based on the specified property (height, volume, or base area).
+     * 
+     * @param shapes  The array of Shape objects to sort
+     * @param unitType  The property to sort by (h=height, v=volume, a=base area)
+     * @return The array of Shape objects (currently unsorted)
+     */
 	public static Shape[] mergeSort(Shape[] shapes, char unitType)
 	{
 		return shapes;
 	}
 
+	 /**
+     * Sorts an array of shapes using the quick sort algorithm.
+     * 
+     * This method implements the quick sort algorithm to sort the shapes
+     * in descending order based on the specified property (height, volume, or base area).
+     * 
+     * @param shapes  The array of Shape objects to sort
+     * @param unitType  The property to sort by (h=height, v=volume, a=base area)
+     * @return The array of Shape objects (currently unsorted)
+     */
 	public static Shape[] quickSort(Shape[] shapes, char unitType)
 	{
 		return shapes;

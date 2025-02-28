@@ -1,22 +1,35 @@
 package appDomain;
 
-import appDomain.parser.ArgumentParser;
+import appDomain.util.Utility;
+import appDomain.util.ArgumentParser;
 import shapes.Shape;
-import utility.Algorithms;
 
+/**
+ * The main driver class for the shape sorting application.
+ * 
+ * This class contains the main method that processes command-line arguments,
+ * initializes the application components, and executes the selected sorting algorithm
+ * on the shape data.
+ * 
+ */
 public class AppDriver
 {
+	/**
+     * The application entry point.
+     * 
+     * Parses command-line arguments, loads shape data from the specified file,
+     * and sorts the shapes using the selected algorithm and comparison property.
+     * The sorting performance is measured and reported in milliseconds.
+     * 
+     * @param args  Command-line arguments in the format:
+     *             
+     * -f[fileName]: The input file name containing shape data, either relative or absolute
+     * -t[unitType]: The property to sort by (v=volume, h=height, a=base area)
+     * -s[algorithm]: The sorting algorithm to use (b=bubble, s=selection, 
+     *  			  i=insertion, m=merge, q=quick, z=custom)
+     */
 	public static void main( String[] args )
-	{
-		// TODO Auto-generated method stub
-
-		// refer to demo02 Student.java for comparable implementation, and
-		// NameCompare.java or GradeCompare for comparator implementations
-
-		// refer to demo02 KittySort.java on how to use a custom sorting
-		// algorithm on a list of comparables to sort using either the
-		// natural order (comparable) or other orders (comparators)
-		
+	{		
 		ArgumentParser argParser = new ArgumentParser();
 		
 		if (argParser.parseArgs(args) != null)
@@ -33,22 +46,24 @@ public class AppDriver
 			switch (sortingAlgorithm)
 			{
 				case 'b':
-					sortedArr = Algorithms.bubbleSort(shapes, unitType);
+					sortedArr = Utility.bubbleSort(shapes, unitType);
 					break;
 					
 				case 's':
-					sortedArr = Algorithms.selectionSort(shapes, unitType);
+					sortedArr = Utility.selectionSort(shapes, unitType);
 					break;
 					
 				case 'i':
-					sortedArr = Algorithms.insertionSort(shapes, unitType);
+					sortedArr = Utility.insertionSort(shapes, unitType);
 					break;
 					
 				case 'm':
-					return;
+					sortedArr = Utility.mergeSort(shapes, unitType);
 					
 				case 'q':
-					sortedArr = Algorithms.quickSort(shapes, unitType);
+					sortedArr = Utility.quickSort(shapes, unitType);
+					break;
+				case 'z':
 					break;
 			}
 			long endTime = System.currentTimeMillis();

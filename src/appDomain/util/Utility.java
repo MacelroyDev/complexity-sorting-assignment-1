@@ -34,26 +34,33 @@ public class Utility
 		System.out.printf("%-20s %-25s %-10f%n", "First element:", shapes[0].getClass().getSimpleName(),
 				(unitType == 'h' ? shapes[0].getHeight()
 						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
-
+		
+		
+		// Set comparator based on args
+		
+		if (unitType == 'h')
+		{
+			comparator = Comparator.naturalOrder(); // natural order allows use of the Comparable written in the shapes class
+		}
+		else if (unitType == 'v')
+		{
+			comparator = new VolumeComparator();
+		}
+		else if (unitType == 'a')
+		{
+			comparator = new BaseAreaComparator();
+		}
+		
+		
+		// Loop through shapes based using the comparator
+		
 		for (int i = 0; i < n - 1; i++)
 		{
 			for (int x = 0; x < n - i - 1; x++)
 			{
+				
 				int comparison = 0;
-				if (unitType == 'h')
-				{
-					comparison = Double.compare(shapes[x].getHeight(), shapes[x + 1].getHeight());
-				}
-				else if (unitType == 'v')
-				{
-					comparator = new VolumeComparator();
-					//comparison = Double.compare(shapes[x].calcVolume(), shapes[x + 1].calcVolume());
-					comparison = comparator.compare(shapes[x], shapes[x+1]);
-				}
-				else if (unitType == 'a')
-				{
-					comparison = Double.compare(shapes[x].calcBaseArea(), shapes[x + 1].calcBaseArea());
-				}
+				comparison = comparator.compare(shapes[x], shapes[x+1]);
 
 				if (comparison < 0)
 				{

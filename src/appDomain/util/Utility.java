@@ -156,18 +156,22 @@ public class Utility {
 				(unitType == 'h' ? shapes[0].getHeight()
 						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
 
+		// Set comparator based on args
+
+		if (unitType == 'h') {
+			comparator = Comparator.naturalOrder(); // natural order uses the Comparable written in shapes class
+		} else if (unitType == 'v') {
+			comparator = new VolumeComparator();
+		} else if (unitType == 'a') {
+			comparator = new BaseAreaComparator();
+		}
+
 		for (int i = 0; i < n - 1; i++) {
 			int maxIndex = i;
 
 			for (int j = i + 1; j < n; j++) {
 				int comparison = 0;
-				if (unitType == 'h') {
-					comparison = Double.compare(shapes[j].getHeight(), shapes[maxIndex].getHeight());
-				} else if (unitType == 'v') {
-					comparison = Double.compare(shapes[j].calcVolume(), shapes[maxIndex].calcVolume());
-				} else if (unitType == 'a') {
-					comparison = Double.compare(shapes[j].calcBaseArea(), shapes[maxIndex].calcBaseArea());
-				}
+				comparison = comparator.compare(shapes[j], shapes[maxIndex]);
 
 				if (comparison > 0) {
 					maxIndex = j;

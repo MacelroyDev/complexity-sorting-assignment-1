@@ -1,7 +1,6 @@
 package appDomain.util;
 
 import java.util.Comparator;
-import java.util.Arrays;
 import shapes.Shape;
 import shapes.BaseAreaComparator;
 import shapes.VolumeComparator;

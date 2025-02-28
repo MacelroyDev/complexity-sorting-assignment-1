@@ -70,8 +70,8 @@ public class AppDriver
 			long endTime = System.currentTimeMillis();
 			
 			
-			//Utility.printSortedShapes(sortedArr, unitType);
-			Utility.printArrayDebug(sortedArr, unitType); // Comment this line out to disable debug printing
+			Utility.printSortedShapes(sortedArr, unitType);
+			//Utility.printArrayDebug(sortedArr, unitType); // Comment this line out to disable debug printing
 			System.out.println("\nSorting completed in: " + (endTime - startTime) + "ms");
 		} 
 		else

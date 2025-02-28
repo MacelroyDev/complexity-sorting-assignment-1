@@ -1,6 +1,7 @@
 package appDomain;
 
 import shapes.*;
+import utility.Algorithms;
 import appDomain.parser.*;
 
 public class AppDriver
@@ -29,14 +30,35 @@ public class AppDriver
 			char sortingAlgorithm = argParser.getSortingAlgorithm();
 			char unitType = argParser.getUnitType();
 			Shape[] shapes = argParser.generateArray();
+			Shape[] sortedArr = null;
 			
-			System.out.print("Chosen sort: " + sortingAlgorithm + "\n");
-			System.out.print("Chosen unit: " + unitType + "\n");
+			System.out.println("Chosen sorting algorithm: " + sortingAlgorithm);
+			System.out.println("Chosen unit to sort by: " + unitType);
 			
-			for (Shape shape : shapes)
+			long startTime = System.currentTimeMillis();
+			switch (sortingAlgorithm)
 			{
-				System.out.print(shape + "\n");
+				case 'b':
+					sortedArr = Algorithms.bubbleSort(shapes, unitType);
+					break;
+					
+				case 's':
+					sortedArr = Algorithms.selectionSort(shapes, unitType);
+					break;
+					
+				case 'i':
+					sortedArr = Algorithms.insertionSort(shapes, unitType);
+					break;
+					
+				case 'm':
+					return;
+					
+				case 'q':
+					return;
 			}
+			long endTime = System.currentTimeMillis();
+			
+			System.out.println("\nSorting completed in: " + (endTime - startTime) + "ms");
 		} 
 		else
 		{
@@ -48,29 +70,5 @@ public class AppDriver
 			System.out.println("-s or -S followed by b (bubble), s (selection), i (insertion), m (merge), q "
 					+ "(quick) or z (your choice of sorting algorithm) with no spaces");
 		}
-		
-		// Example objects for testing toString() and calculation methods
-		/*
-		 * Cylinder newCylinder = new Cylinder(19,40); Cone newCone = new Cone(22,17);
-		 * Pyramid newPyramid = new Pyramid(38,29);
-		 * 
-		 * 
-		 * SquarePrism newSquarePrism = new SquarePrism(18,19); TriangularPrism
-		 * newTriangularPrism = new TriangularPrism(18,19); PentagonalPrism
-		 * newPentagonalPrism = new PentagonalPrism(18,19); OctagonalPrism
-		 * newOctagonalPrism = new OctagonalPrism(18,19);
-		 * 
-		 * 
-		 * // Print objects to console for debugging
-		 * System.out.println(newCylinder.toString());
-		 * System.out.println(newCone.toString());
-		 * System.out.println(newPyramid.toString());
-		 * 
-		 * System.out.println(newSquarePrism.toString());
-		 * System.out.println(newTriangularPrism.toString());
-		 * System.out.println(newPentagonalPrism.toString());
-		 * System.out.println(newOctagonalPrism.toString());
-		 */
 	}
-	
 }

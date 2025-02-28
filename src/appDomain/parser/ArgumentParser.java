@@ -5,174 +5,198 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import shapes.*;
 
-public class ArgumentParser {
+public class ArgumentParser
+{
 
-	
 	// Set vars
 	private String fileName;
 	private char unitType;
 	private char sortingAlgorithm;
-	
-	
+
 	// Getters and Setters
-	public String getFileName() {
+	public String getFileName()
+	{
 		return fileName;
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(String fileName)
+	{
 		this.fileName = fileName;
 	}
 
-	public char getUnitType() {
+	public char getUnitType()
+	{
 		return unitType;
 	}
 
-	public void setUnitType(char unitType) {
+	public void setUnitType(char unitType)
+	{
 		this.unitType = unitType;
 	}
 
-	public char getSortingAlgorithm() {
+	public char getSortingAlgorithm()
+	{
 		return sortingAlgorithm;
 	}
 
-	public void setSortingAlgorithm(char sortingAlgorithm) {
+	public void setSortingAlgorithm(char sortingAlgorithm)
+	{
 		this.sortingAlgorithm = sortingAlgorithm;
 	}
 
-	
-	
 	// Parse Arguments ----------------------------
-	
-	public Character parseArgs(String[] args) {
-		for (String arg : args) {
-			if (!arg.startsWith("-") || arg.length() < 3) {
+
+	public Character parseArgs(String[] args)
+	{
+		for (String arg : args)
+		{
+			if (!arg.startsWith("-") || arg.length() < 3)
+			{
 				return null;
 			}
 
 			char flag = Character.toLowerCase(arg.charAt(1));
 
-			switch (flag) {
-			case 'f':
-				fileName = arg.substring(2);
-				break;
+			switch (flag)
+			{
+				case 'f':
+					fileName = arg.substring(2);
+					break;
 
-			case 't':
-				if (arg.length() != 3) {
-					System.out.println("Incorrect '-t' flag argument");
+				case 't':
+					if (arg.length() != 3)
+					{
+						System.out.println("Incorrect '-t' flag argument");
+						return null;
+					}
+
+					char type = Character.toLowerCase(arg.charAt(2));
+
+					if (type == 'v' || type == 'h' || type == 'a')
+					{
+						setUnitType(type);
+					}
+					else
+					{
+						System.out.println("Incorrect '-t' flag argument");
+						return null;
+					}
+					break;
+
+				case 's':
+					if (arg.length() != 3)
+					{
+						System.out.println("Incorrect '-s' flag argument");
+						return null;
+					}
+
+					char algorithm = Character.toLowerCase(arg.charAt(2));
+
+					if (algorithm == 'b' || algorithm == 's' || algorithm == 'i' || algorithm == 'm' || algorithm == 'q'
+							|| algorithm == 'z')
+					{
+						setSortingAlgorithm(algorithm);
+					}
+					else
+					{
+						System.out.println("Incorrect '-s' flag argument");
+						return null;
+					}
+					break;
+
+				default:
+					System.out.println("Incorrect flag(s)");
 					return null;
-				}
-
-				char type = Character.toLowerCase(arg.charAt(2));
-
-				if (type == 'v' || type == 'h' || type == 'a') {
-					setUnitType(type);
-				} else {
-					System.out.println("Incorrect '-t' flag argument");
-					return null;
-				}
-				break;
-
-			case 's':
-				if (arg.length() != 3) {
-					System.out.println("Incorrect '-s' flag argument");
-					return null;
-				}
-
-				char algorithm = Character.toLowerCase(arg.charAt(2));
-
-				if (algorithm == 'b' || algorithm == 's' || algorithm == 'i' || algorithm == 'm' || algorithm == 'q'
-						|| algorithm == 'z') {
-					setSortingAlgorithm(algorithm);
-				} else {
-					System.out.println("Incorrect '-s' flag argument");
-					return null;
-				}
-				break;
-
-			default:
-				System.out.println("Incorrect flag(s)");
-				return null;
 			}
 		}
 
-		if (fileName != null && unitType != 0 && sortingAlgorithm != 0) {
+		if (fileName != null && unitType != 0 && sortingAlgorithm != 0)
+		{
 			return (sortingAlgorithm);
-		} else {
+		}
+		else
+		{
 			return null;
 		}
 
 	}
 
-	
-	
 	// Generate Array ---------------------------------------
-	
-	public Shape[] generateArray() {
+
+	public Shape[] generateArray()
+	{
 		File inputFile = new File(getFileName());
 		Scanner input = null;
 
 		int numOfShapes = 0;
 
-		try {
+		try
+		{
 			input = new Scanner(inputFile);
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e)
+		{
 			e.printStackTrace();
 		}
 
-		if (input.hasNext()) {
+		if (input.hasNext())
+		{
 			numOfShapes = input.nextInt();
 		}
 
 		Shape[] shapes = new Shape[numOfShapes];
 		int arrIndex = 0;
 
-		while (input.hasNext()) {
+		while (input.hasNext())
+		{
 			String shapeType = input.next();
 
-			if (input.hasNext()) {
+			if (input.hasNext())
+			{
 				double shapeSide = Double.parseDouble(input.next());
 
-				if (input.hasNext()) {
+				if (input.hasNext())
+				{
 					double shapeHeight = Double.parseDouble(input.next());
 
-					switch (shapeType) {
-					case "Cone":
-						Cone newCone = new Cone(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newCone;
-						break;
+					switch (shapeType)
+					{
+						case "Cone":
+							Cone newCone = new Cone(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newCone;
+							break;
 
-					case "Cylinder":
-						Cylinder newCylinder = new Cylinder(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newCylinder;
-						break;
+						case "Cylinder":
+							Cylinder newCylinder = new Cylinder(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newCylinder;
+							break;
 
-					case "OctagonalPrism":
-						OctagonalPrism newOctagonalPrism = new OctagonalPrism(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newOctagonalPrism;
-						break;
+						case "OctagonalPrism":
+							OctagonalPrism newOctagonalPrism = new OctagonalPrism(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newOctagonalPrism;
+							break;
 
-					case "PentagonalPrism":
-						PentagonalPrism newPentagonalPrism = new PentagonalPrism(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newPentagonalPrism;
-						break;
+						case "PentagonalPrism":
+							PentagonalPrism newPentagonalPrism = new PentagonalPrism(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newPentagonalPrism;
+							break;
 
-					case "Pyramid":
-						Pyramid newPyramid = new Pyramid(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newPyramid;
-						break;
+						case "Pyramid":
+							Pyramid newPyramid = new Pyramid(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newPyramid;
+							break;
 
-					case "SquarePrism":
-						SquarePrism newSquarePrism = new SquarePrism(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newSquarePrism;
-						break;
+						case "SquarePrism":
+							SquarePrism newSquarePrism = new SquarePrism(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newSquarePrism;
+							break;
 
-					case "TriangularPrism":
-						TriangularPrism newTriangularPrism = new TriangularPrism(shapeSide, shapeHeight);
-						shapes[arrIndex++] = newTriangularPrism;
-						break;
+						case "TriangularPrism":
+							TriangularPrism newTriangularPrism = new TriangularPrism(shapeSide, shapeHeight);
+							shapes[arrIndex++] = newTriangularPrism;
+							break;
 
-					default:
-						break;
+						default:
+							break;
 					}
 				}
 			}

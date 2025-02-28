@@ -76,7 +76,7 @@ public class Utility
      * Sorts an array of shapes using the insertion sort algorithm.
      * 
      * This method implements the insertion sort algorithm to sort the shapes
-     * in ascending order based on the specified property (height, volume, or base area).
+     * in descending order based on the specified property (height, volume, or base area).
      * 
      * @param shapes  The array of Shape objects to sort
      * @param unitType  The property to sort by (h=height, v=volume, a=base area)
@@ -112,7 +112,7 @@ public class Utility
 					comparison = Double.compare(shapes[j].calcBaseArea(), index.calcBaseArea());
 				}
 
-				if (comparison > 0)
+				if (comparison < 0)
 				{
 					shapes[j + 1] = shapes[j];
 					j = j - 1;

@@ -1,5 +1,11 @@
 package shapes;
 
+
+/**
+ * An abstract class representing a basic shape.
+ * This class provides height, a compareTo method for comparing height
+ * and 2 abstract methods of calculating volume and base area.
+ */
 public abstract class Shape implements Comparable<Shape> {
 
 	// Set vars

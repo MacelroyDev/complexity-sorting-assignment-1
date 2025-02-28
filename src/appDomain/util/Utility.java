@@ -287,11 +287,59 @@ public class Utility {
 	 * @return The array of Shape objects (currently unsorted)
 	 */
 	public static Shape[] quickSort(Shape[] shapes, char unitType) {
-		return shapes;
+	    if (shapes == null || shapes.length <= 1) {
+	        return shapes;
+	    }
+	    quick(shapes, 0, shapes.length - 1, unitType);
+	    return shapes;
+	}
+	//Helping sorting method for quickSort
+	private static void quick(Shape[] shapes, int low, int high, char unitType) {
+	    if (low < high) {
+	        int partX = part(shapes, low, high, unitType);
+	        quick(shapes, low, partX - 1, unitType);
+	        quick(shapes, partX + 1, high, unitType);
+	    }
+	}
+	//Partition sort the array around a pivot element
+	private static int part(Shape[] shapes, int low, int high, char unitType) {
+	    Comparator<Shape> comparator = getComparator(unitType);
+	    Shape pivot = shapes[high];
+	    int i = low - 1;
+
+	    for (int x = low; x < high; x++) {
+	        if (comparator.compare(shapes[x], pivot) >= 0) {
+	            i++;
+	            swap(shapes, i, x);
+	        }
+	    }
+	    swap(shapes, i + 1, high);
+	    return i + 1; // Moves pivot in the correct position
 	}
 
+	private static Comparator<Shape> getComparator(char unitType) {
+	    Comparator<Shape> comparator = null; // Declare comparator
+
+	    if (unitType == 'h') {
+	        comparator = Comparator.naturalOrder();
+	    } else if (unitType == 'v') {
+	        comparator = new VolumeComparator();
+	    } else if (unitType == 'a') {
+	        comparator = new BaseAreaComparator();
+	    }
+	    return comparator;
+	}
+	//swaps the elements in the array
+	private static void swap(Shape[] shapes, int i, int x) {
+	    Shape temp = shapes[i];
+	    shapes[i] = shapes[x];
+	    shapes[x] = temp;
+	}
+
+
+
 	
-	
+
 	/**
 	 * Prints the first, last, and every 1000th element of the sorted array
 	 * 

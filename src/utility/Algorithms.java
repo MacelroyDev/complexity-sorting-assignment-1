@@ -20,7 +20,7 @@ public class Algorithms
 						shapes[x + 1] = temp;
 					}
 				}
-				if (unitType == 'v')
+				else if (unitType == 'v')
 				{
 					if (shapes[x].calcVolume() < shapes[x + 1].calcVolume())
 					{
@@ -29,7 +29,7 @@ public class Algorithms
 						shapes[x + 1] = temp;
 					}
 				}
-				if (unitType == 'a')
+				else if (unitType == 'a')
 				{
 					if (shapes[x].calcBaseArea() < shapes[x + 1].calcBaseArea())
 					{
@@ -39,6 +39,44 @@ public class Algorithms
 					}
 				}
 			}
+		}
+		return shapes;
+	}
+
+	public static Shape[] insertionSort(Shape[] shapes, char unitType)
+	{
+		int n = shapes.length;
+		for (int i = 1; i < n; i++)
+		{
+			Shape index = shapes[i];
+			int j = i - 1;
+
+			if (unitType == 'h')
+			{
+				while (j >= 0 && shapes[j].getHeight() < index.getHeight())
+				{
+					shapes[j + 1] = shapes[j];
+					j = j - 1;
+				}
+			} 
+			else if (unitType == 'v')
+			{
+				while (j >= 0 && shapes[j].calcVolume() < index.calcVolume())
+				{
+					shapes[j + 1] = shapes[j];
+					j = j - 1;
+				}
+			} 
+			else if (unitType == 'a')
+			{
+				while (j >= 0 && shapes[j].calcBaseArea() < index.calcBaseArea())
+				{
+					shapes[j + 1] = shapes[j];
+					j = j - 1;
+				}
+			}
+
+			shapes[j + 1] = index;
 		}
 		return shapes;
 	}

@@ -5,11 +5,6 @@ import appDomain.parser.*;
 
 public class AppDriver
 {
-	// CLI argument variables
-	//private String fileName;
-	//private char unitType;
-	//private char sortingAlgorithm;
-	
 	public static void main( String[] args )
 	{
 		// TODO Auto-generated method stub
@@ -31,9 +26,13 @@ public class AppDriver
 		
 		if (argParser.parseArgs(args) != null)
 		{
-			System.out.print("Chosen sort: " + argParser.getSortingAlgorithm() + "\n");
-			System.out.print("Chosen unit: " + argParser.getUnitType() + "\n");
+			char sortingAlgorithm = argParser.getSortingAlgorithm();
+			char unitType = argParser.getUnitType();
 			Shape[] shapes = argParser.generateArray();
+			
+			System.out.print("Chosen sort: " + sortingAlgorithm + "\n");
+			System.out.print("Chosen unit: " + unitType + "\n");
+			
 			for (Shape shape : shapes)
 			{
 				System.out.print(shape + "\n");

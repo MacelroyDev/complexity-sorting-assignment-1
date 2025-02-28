@@ -58,7 +58,7 @@ public class Algorithms
 					shapes[j + 1] = shapes[j];
 					j = j - 1;
 				}
-			} 
+			}
 			else if (unitType == 'v')
 			{
 				while (j >= 0 && shapes[j].calcVolume() < index.calcVolume())
@@ -66,7 +66,7 @@ public class Algorithms
 					shapes[j + 1] = shapes[j];
 					j = j - 1;
 				}
-			} 
+			}
 			else if (unitType == 'a')
 			{
 				while (j >= 0 && shapes[j].calcBaseArea() < index.calcBaseArea())
@@ -77,6 +77,44 @@ public class Algorithms
 			}
 
 			shapes[j + 1] = index;
+		}
+		return shapes;
+	}
+
+	public static Shape[] selectionSort(Shape[] shapes, char unitType)
+	{
+		int n = shapes.length;
+		for (int i = 0; i < n - 1; i++)
+		{
+			int maxIndex = i;
+
+			for (int j = i + 1; j < n; j++)
+			{
+				if (unitType == 'h')
+				{
+					if (shapes[j].getHeight() > shapes[maxIndex].getHeight())
+					{
+						maxIndex = j;
+					}
+				}
+				else if (unitType == 'v')
+				{
+					if (shapes[j].calcVolume() > shapes[maxIndex].calcVolume())
+					{
+						maxIndex = j;
+					}
+				}
+				else if (unitType == 'a')
+				{
+					if (shapes[j].calcBaseArea() > shapes[maxIndex].calcBaseArea())
+					{
+						maxIndex = j;
+					}
+				}
+			}
+			Shape temp = shapes[i];
+			shapes[i] = shapes[maxIndex];
+			shapes[maxIndex] = temp;
 		}
 		return shapes;
 	}

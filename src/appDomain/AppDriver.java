@@ -68,6 +68,8 @@ public class AppDriver
 			}
 			long endTime = System.currentTimeMillis();
 			
+			
+			Utility.printSortedShapes(sortedArr, unitType);
 			System.out.println("\nSorting completed in: " + (endTime - startTime) + "ms");
 		} 
 		else

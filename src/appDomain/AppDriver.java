@@ -10,12 +10,6 @@ public class AppDriver
 	{
 		// TODO Auto-generated method stub
 
-		// refer to demo001 BasicFileIO.java for a simple example on how to
-		// read data from a text file
-
-		// refer to demo01 Test.java for an example on how to parse command
-		// line arguments and benchmarking tests
-
 		// refer to demo02 Student.java for comparable implementation, and
 		// NameCompare.java or GradeCompare for comparator implementations
 
@@ -33,7 +27,7 @@ public class AppDriver
 			Shape[] sortedArr = null;
 			
 			System.out.println("Chosen sorting algorithm: " + sortingAlgorithm);
-			System.out.println("Chosen unit to sort by: " + unitType);
+			System.out.println("Chosen unit to sort by: " + unitType + "\n");
 			
 			long startTime = System.currentTimeMillis();
 			switch (sortingAlgorithm)

@@ -42,6 +42,7 @@ public class AppDriver
 			System.out.println("Chosen sorting algorithm: " + sortingAlgorithm);
 			System.out.println("Chosen unit to sort by: " + unitType + "\n");
 			
+			System.out.println("LOADING...");
 			long startTime = System.currentTimeMillis();
 			switch (sortingAlgorithm)
 			{
@@ -60,18 +61,21 @@ public class AppDriver
 				case 'm':
 					// Merge sort needs another arg for recursion
 					sortedArr = Utility.mergeSort(shapes, unitType, shapes.length);
+					break;
 					
 				case 'q':
 					sortedArr = Utility.quickSort(shapes, unitType);
 					break;
+					
 				case 'z':
+					sortedArr = Utility.heapSort(shapes, unitType);
 					break;
 			}
 			long endTime = System.currentTimeMillis();
 			
 			
 			Utility.printSortedShapes(sortedArr, unitType);
-			//Utility.printArrayDebug(sortedArr, unitType); // Comment this line out to disable debug printing
+			// Utility.printArrayDebug(sortedArr, unitType); // Comment this line out to disable debug printing
 			System.out.println("\nSorting completed in: " + (endTime - startTime) + "ms");
 		} 
 		else

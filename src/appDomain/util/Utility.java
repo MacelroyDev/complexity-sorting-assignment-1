@@ -29,11 +29,7 @@ public class Utility {
 		int n = shapes.length;
 		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
-
-		System.out.printf("%-20s %-25s %-10f%n", "First element:", shapes[0].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[0].getHeight()
-						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
-
+		
 		// Set comparator based on args
 
 		if (unitType == 'h') {
@@ -58,18 +54,7 @@ public class Utility {
 					shapes[x + 1] = temp;
 				}
 			}
-			sortedCount++;
-			if (sortedCount % 1000 == 0) {
-				System.out.printf("%-20s %-25s %-10f%n", sortedCount + "-th element:",
-						shapes[n - i - 1].getClass().getSimpleName(), (unitType == 'h' ? shapes[n - i - 1].getHeight()
-								: unitType == 'v' ? shapes[n - i - 1].calcVolume() : shapes[n - i - 1].calcBaseArea()));
-			}
-
 		}
-		System.out.printf("%-20s %-25s %-10f%n", "Last element:", shapes[n - 1].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[n - 1].getHeight()
-						: unitType == 'v' ? shapes[n - 1].calcVolume() : shapes[n - 1].calcBaseArea()));
-
 		return shapes;
 	}
 
@@ -88,10 +73,6 @@ public class Utility {
 		int n = shapes.length;
 		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
-
-		System.out.printf("%-20s %-25s %-10.3f%n", "First element:", shapes[0].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[0].getHeight()
-						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
 
 		// Set comparator based on args
 
@@ -120,18 +101,7 @@ public class Utility {
 			}
 
 			shapes[j + 1] = index;
-			sortedCount++;
-
-			if (sortedCount % 1000 == 0) {
-				System.out.printf("%-20s %-25s %-10.3f%n", sortedCount + "-th element:",
-						shapes[j + 1].getClass().getSimpleName(), (unitType == 'h' ? shapes[j + 1].getHeight()
-								: unitType == 'v' ? shapes[j + 1].calcVolume() : shapes[j + 1].calcBaseArea()));
-			}
 		}
-
-		System.out.printf("%-20s %-25s %-10.3f%n", "Last element:", shapes[n - 1].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[n - 1].getHeight()
-						: unitType == 'v' ? shapes[n - 1].calcVolume() : shapes[n - 1].calcBaseArea()));
 
 		return shapes;
 	}
@@ -151,10 +121,6 @@ public class Utility {
 		int n = shapes.length;
 		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
-
-		System.out.printf("%-20s %-25s %-10.3f%n", "First element:", shapes[0].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[0].getHeight()
-						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
 
 		// Set comparator based on args
 
@@ -181,19 +147,7 @@ public class Utility {
 			Shape temp = shapes[i];
 			shapes[i] = shapes[maxIndex];
 			shapes[maxIndex] = temp;
-
-			sortedCount++;
-			if (sortedCount % 1000 == 0) {
-				System.out.printf("%-20s %-25s %-10.3f%n", sortedCount + "-th element:",
-						shapes[i].getClass().getSimpleName(), (unitType == 'h' ? shapes[i].getHeight()
-								: unitType == 'v' ? shapes[i].calcVolume() : shapes[i].calcBaseArea()));
-			}
 		}
-
-		System.out.printf("%-20s %-25s %-10.3f%n", "Last element:", shapes[n - 1].getClass().getSimpleName(),
-				(unitType == 'h' ? shapes[n - 1].getHeight()
-						: unitType == 'v' ? shapes[n - 1].calcVolume() : shapes[n - 1].calcBaseArea()));
-
 		return shapes;
 	}
 
@@ -231,11 +185,8 @@ public class Utility {
 		mergeSort(left,unitType,mid);
 		mergeSort(right,unitType,n - mid);
 		
-		
 		// Return a merged value of the final array
 		return merge(shapes,left,right,mid,n - mid, unitType);
-		
-		
 	}
 	
 	// Helper function for merge sort to re-merge the arrays
@@ -250,7 +201,6 @@ public class Utility {
 		} else if (unitType == 'a') {
 			comparator = new BaseAreaComparator();
 		}
-		
 		
 		int i = 0, j = 0, k = 0;
 	    while (i < left && j < right) {
@@ -336,10 +286,49 @@ public class Utility {
 	    shapes[x] = temp;
 	}
 
-
-
+	/**
+	 * Sorts an array of shapes using the heap sort algorithm.
+	 * 
+	 * This method implements the heap sort algorithm to sort the shapes in
+	 * descending order based on the specified property (height, volume, or base area).
+	 * 
+	 * @param shapes   The array of Shape objects to sort
+	 * @param unitType The property to sort by (h=height, v=volume, a=base area)
+	 * @return The sorted array of Shape objects
+	 */
+	public static Shape[] heapSort(Shape[] shapes, char unitType) {
+	    int x = shapes.length;
+	    Comparator<Shape> comparator = getComparator(unitType);
+	   
+	    for (int i = x / 2 - 1; i >= 0; i--) {
+	        heap(shapes, x, i, comparator); 
+	    }
+	    
+	    for (int i = x - 1; i > 0; i--) {
+	        swap(shapes, 0, i); // Extract elements from heap
+	        heap(shapes, i, 0, comparator); // Move root to the end
+	    }
+	    return shapes;
+	}
 	
+	private static void heap(Shape[] shapes, int x, int i, Comparator<Shape> comparator) {
+	    int largest = i; // Initialize as largest root
+	    int left = 2 * i + 1; 
+	    int right = 2 * i + 2; 
 
+	    if (left < x && comparator.compare(shapes[left], shapes[largest]) > 0) {
+	        largest = left; // Check if left element is bigger than int
+	    }
+	    if (right < x && comparator.compare(shapes[right], shapes[largest]) > 0) {
+	        largest = right; // Check if right element bigger than int
+	    }
+	    // Swap and continue sorting if root is not largest
+	    if (largest != i) {
+	        swap(shapes, i, largest);
+	        heap(shapes, x, largest, comparator);
+	    }
+	}
+	
 	/**
 	 * Prints the first, last, and every 1000th element of the sorted array
 	 * 
@@ -358,7 +347,7 @@ public class Utility {
 				(unitType == 'h' ? shapes[0].getHeight()
 						: unitType == 'v' ? shapes[0].calcVolume() : shapes[0].calcBaseArea()));
 
-		for (int i = 999; i < n - 1; i += 1000) {
+		for (int i = 999; i < n; i += 1000) {
 			System.out.printf("%-20s %-25s %-10.3f%n", (i + 1) + "-th element:", shapes[i].getClass().getSimpleName(),
 					(unitType == 'h' ? shapes[i].getHeight()
 							: unitType == 'v' ? shapes[i].calcVolume() : shapes[i].calcBaseArea()));

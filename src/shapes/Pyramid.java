@@ -1,5 +1,14 @@
 package shapes;
 
+/**
+ * An public class representing a pyramid.
+ * This class provides height, side, and 2 methods being
+ * calcVolume() and calcBaseArea().
+ * @param height of the pyramid
+ * @param side length of the pyramid
+ * @return calcVolume() returns the volume of the pyramid for use with a comparator.
+ * @return calcBaseArea() returns the base area of the pyramid for use with a comparator.
+ */
 public class Pyramid extends Shape {
 	// Set vars
 	private double side;

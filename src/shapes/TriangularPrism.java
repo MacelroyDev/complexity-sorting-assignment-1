@@ -1,5 +1,13 @@
 package shapes;
 
+/**
+ * An public class representing a triangular prism, extended from prism.
+ * This class provides height and side length.
+ * @param height of the shape
+ * @param side length of the shape
+ * @return calcVolume() returns the volume of the prism for use with a comparator.
+ * @return calcBaseArea() returns the base area of the prism for use with a comparator.
+ */
 public class TriangularPrism extends Prism {
 
 	// Constructor

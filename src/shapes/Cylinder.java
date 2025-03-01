@@ -1,5 +1,14 @@
 package shapes;
 
+/**
+ * An public class representing a cylinder.
+ * This class provides height, radius, and 2 methods being
+ * calcVolume() and calcBaseArea().
+ * @param height of the cylinder
+ * @param radius of the cylinder
+ * @return calcVolume() returns the volume of the cylinder for use with a comparator.
+ * @return calcBaseArea() returns the base area of the cylinder for use with a comparator.
+ */
 public class Cylinder extends Shape {
 	// Set vars
 	private double radius;

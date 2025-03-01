@@ -1,5 +1,13 @@
 package shapes;
 
+/**
+ * An public class representing a octagonal prism, extended from prism.
+ * This class provides height and side length.
+ * @param height of the shape
+ * @param side length of the shape
+ * @return calcVolume() returns the volume of the prism for use with a comparator.
+ * @return calcBaseArea() returns the base area of the prism for use with a comparator.
+ */
 public class OctagonalPrism extends Prism {
 
 	// Constructor

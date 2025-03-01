@@ -1,5 +1,14 @@
 package shapes;
 
+/**
+ * An public class representing a cone.
+ * This class provides height, radius, and 2 methods being
+ * calcVolume() and calcBaseArea().
+ * @param height of the cone
+ * @param radius of the cone
+ * @return calcVolume() returns the volume of the cone for use with a comparator.
+ * @return calcBaseArea() returns the base area of the cone for use with a comparator.
+ */
 public class Cone extends Shape {
 	// Set vars (Same vars as cylinder)
 	private double radius;

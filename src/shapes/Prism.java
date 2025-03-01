@@ -1,5 +1,11 @@
 package shapes;
 
+/**
+ * An abstract class representing a basic prism, extended from shape.
+ * This class provides height and side length.
+ * @param height of the shape
+ * @param side length of the shape
+ */
 public abstract class Prism extends Shape {
 	// Set vars
 	private double side;
@@ -19,6 +25,5 @@ public abstract class Prism extends Shape {
 		this.side = side;
 	}
 	
-	// I don't think I need to re-add the compareTo method
 
 }

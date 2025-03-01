@@ -26,7 +26,7 @@ public class AppDriver
      * -f[fileName]: The input file name containing shape data, either relative or absolute
      * -t[unitType]: The property to sort by (v=volume, h=height, a=base area)
      * -s[algorithm]: The sorting algorithm to use (b=bubble, s=selection, 
-     *  			  i=insertion, m=merge, q=quick, z=custom)
+     *  			  i=insertion, m=merge, q=quick, z=heap)
      */
 	public static void main( String[] args )
 	{		

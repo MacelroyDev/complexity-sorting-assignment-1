@@ -38,4 +38,4 @@ Possible options include:
 -si | insertion sort
 -sm | merge sort
 -sq | quick sort
--sz | 
+-sz | heap sort

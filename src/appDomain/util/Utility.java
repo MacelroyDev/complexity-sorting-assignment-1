@@ -27,7 +27,6 @@ public class Utility {
 	 */
 	public static Shape[] bubbleSort(Shape[] shapes, char unitType) {
 		int n = shapes.length;
-		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
 		
 		// Set comparator based on args
@@ -71,7 +70,6 @@ public class Utility {
 	 */
 	public static Shape[] insertionSort(Shape[] shapes, char unitType) {
 		int n = shapes.length;
-		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
 
 		// Set comparator based on args
@@ -119,7 +117,6 @@ public class Utility {
 	 */
 	public static Shape[] selectionSort(Shape[] shapes, char unitType) {
 		int n = shapes.length;
-		int sortedCount = 1;
 		Comparator<Shape> comparator = null; // Declare comparator
 
 		// Set comparator based on args
